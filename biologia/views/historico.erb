@@ -1,0 +1,13 @@
+<h1>Histórico</h1>
+<a type="button" class="btn btn-default" href="/biologia/historico/limpa/<%= session[:id] %>">Limpar histórico</a>
+<table class="table">
+	<tr> 
+		<th>Cadeia</th>
+	</tr>
+	<% @itens.each do |cadeia| %>
+		<tr> 
+			<td class="strong"> <%= cadeia.cadeia %> </td>
+			<td> <a type="button" class="btn btn-default" href="/biologia/calculadora/<%= cadeia.cadeia %>">Calcular</a></td>
+		</tr>
+	<% end %>
+</table>

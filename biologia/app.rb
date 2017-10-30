@@ -36,8 +36,6 @@ if !existe('admin', 'admin')
 	admin.senha = Digest::MD5.hexdigest('admin')
 
 	admin.save
-else
-
 end
 
 def getUser(email, senha)
@@ -132,7 +130,7 @@ post '/biologia/cadastro' do
 		session[:id] = getUser(email, senha).id
 		session[:nome] = getUser(email, senha).nome
 
-		redirect '/biologia/calculadora'
+		redirect session[:previous_url] || '/biologia/calculadora'
 	else
 		@error = 'Cadastro inválido ou já existente.'
 		
@@ -153,7 +151,7 @@ post '/biologia/atualiza_cadastro/:id' do
 	email = params['email'].to_s
 	senha = Digest::MD5.hexdigest(params['senha'])
 
-	if !existe(email, senha) then
+	if !existe(email, senha)
 		usuario = Usuario.get(:id => id)
 		
 		usuario.update(:nome => nome, :email => email, :senha => senha)
@@ -162,7 +160,7 @@ post '/biologia/atualiza_cadastro/:id' do
 		session[:id] = getUser(email, senha).id
 		session[:nome] = getUser(email, senha).nome
 
-		redirect '/biologia/calculadora'
+		redirect session[:previous_url] || '/biologia/calculadora'
 	else
 		@error = 'Cadastro inválido ou já existente.'
 		
@@ -397,9 +395,9 @@ get '/biologia/admin/atualiza_cadastro/:id' do
 		@erro = "Não é possível excluir nem editar o admin."
 		redirect '/biologia/admin/usuarios'
 	else
-		@usuario = getUserById(id.to_i)
+		@usuario = getUserById(session[:id])
 
-		erb :admin_atualiza_cadastro
+		erb :atualiza_cadastro
 	end
 end
 
@@ -417,17 +415,15 @@ post '/biologia/admin/atualiza_cadastro/:id' do
 		redirect '/biologia/admin/usuarios'
 	else
 		if !existe(email, senha)
-			usuario = Usuario.first(:id => id)
-
-			puts "Nome: " + nome.to_s + " " + email.to_s + " " + senha.to_s
+			usuario = Usuario.get(:id => id)
 		
 			usuario.update(:nome => nome, :email => email, :senha => senha)
 
-			redirect '/biologia/admin/usuarios'
+			redirect session[:previous_url] || '/biologia/admin/usuarios'
 		else
 			@error = 'Cadastro inválido ou já existente.'
 			
-			redirect '/biologia/admin/usuarios'
+			erb :usuarios
 		end
 	end
 end

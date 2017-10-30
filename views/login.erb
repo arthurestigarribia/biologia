@@ -1,0 +1,12 @@
+<h1>Login</h1>
+<%= @error %>
+<form action="/biologia/login" id="form" method="post">
+	<input class="form-control" type="text" id="email" name="email" placeholder="Email">
+	<input class="form-control" type="password" name="senha" placeholder="Senha">
+	<input class="form-control" type="submit" value="Entrar">
+</form>
+<a type="button" class="btn btn-default" href="/biologia/cadastro">Cadastrar</a>
+<!---
+<div id="erro"></div>
+<script type="text/javascript" src="/js/valida_cadastro.js"></script>
+-->

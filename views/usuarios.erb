@@ -1,0 +1,26 @@
+<h1>Usuários</h1>
+<a type="button" class="btn btn-default" href="/biologia/admin/cadastro">Criar</a>
+<table class="table">
+	<tr> 
+		<th>Usuário</th>
+		<th>Email</th>
+		<th>Editar</th>
+		<th>Excluir</th>
+		<th>Histórico</th>
+	</tr>
+	<% @itens.each do |usuario| %>
+		<tr> 
+			<td class="strong"> <%= usuario.nome %> </td>
+			<td><%= usuario.email %></td>
+			<% if usuario.nome != 'admin' && usuario.email != 'admin' && usuario.senha != Digest::MD5.hexdigest('admin') %>
+				<td><a type="button" class="btn btn-default" href="/biologia/admin/atualiza_cadastro/<%= usuario.id %>">Editar</a></td>
+				<td><a type="button" class="btn btn-default" href="/biologia/admin/remove_cadastro/<%= usuario.id %>">Excluir</a></td>
+				<td><a type="button" class="btn btn-default" href="/biologia/admin/historico/<%= usuario.id %>">Histórico</a></td>
+			<% else %>
+				<td></td>
+				<td></td>
+				<td><a type="button" class="btn btn-default" href="/biologia/admin/historico/<%= usuario.id %>">Histórico</a></td>
+			<% end %>
+		</tr>
+	<% end %>
+</table>

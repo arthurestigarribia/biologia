@@ -1,0 +1,11 @@
+<h1>Calculadora de Ácidos Nucleicos</h1>
+<% if @cadeia != nil %>
+	<input class="form-control" type="text" value="<%= @cadeia %>" id="cadeia">
+<% else %>
+	<input class="form-control" type="text" value="" id="cadeia">
+<% end %>
+<button class="btn btn-default" onclick="executa()">Calcular</button>
+<h2>Resultados</h2>
+<div class="strong">Complementar: </div><div id="complementar"></div>
+<div class="strong">Equivalente: </div><div id="equivalente"></div>
+<div class="strong">Ácidos: </div><div id="acidos"></div>

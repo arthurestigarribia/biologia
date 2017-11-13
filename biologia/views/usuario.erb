@@ -1,8 +1,0 @@
-<h1>Usuário</h1>
-<h2> <%= @usuario.nome %></h2>
-<a type="button" class="btn btn-default" href="/biologia/historico/<%= @usuario.id %>">Histórico</a>
-<% if @usuario.nome != 'admin' %>
-	<a type="button" class="btn btn-default" href="/biologia/remove_cadastro/<%= @usuario.id %>">Fechar conta</a>
-	<a type="button" class="btn btn-default" href="/biologia/atualiza_cadastro/<%= @usuario.id %>">Atualizar cadastro</a>
-<% end %>
-<a type="button" class="btn btn-default" href="/biologia/logout">Sair</a>

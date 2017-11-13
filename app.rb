@@ -15,18 +15,12 @@ def naoVazio(email, senha)
 	return (email != '' || email != 'admin'  || senha != '')
 end
 
-def naoVazio(nome, email, senha)
+def naoVazioNome(nome, email, senha)
 	return (nome != '' || nome != 'admin' || email != '' || email != 'admin'  || senha != '')
 end
 
 def existe(email, senha)
-	Usuario.all.each do |usuario|
-		if usuario.email.to_s == email.to_s && usuario.senha.to_s == senha.to_s
-			return true
-		end
-	end
-
-	return false
+	return Usuario.all(:email => email, :senha => senha) != nil
 end
 
 if !existe('admin', 'admin')
@@ -37,27 +31,17 @@ if !existe('admin', 'admin')
 
 	admin.save
 else
-
+	puts 'Admin já foi criado'
 end
 
-def getUser(email, senha)
-	Usuario.all.each do |usuario|
-		if usuario.email.to_s == email.to_s && usuario.senha.to_s == senha.to_s
-			return usuario
-		end
-	end
+puts !existe('admin', 'admin')
 
-	return nil
+def getUser(email, senha)
+	return Usuario.first(:email => email, :senha => senha)
 end
 
 def getUserById(id)
-	Usuario.all.each do |usuario|
-		if usuario.id == id
-			return usuario
-		end
-	end
-
-	return nil
+	return Usuario.first(:id => id)
 end
 
 before '/biologia/calculadora' do
@@ -120,7 +104,7 @@ post '/biologia/cadastro' do
 	email = params['email'].to_s
 	senha = Digest::MD5.hexdigest(params['senha'])
 
-	if !existe(email, senha) && naoVazio(nome, email, senha)
+	if !existe(email, senha) && naoVazioNome(nome, email, senha)
 		usuario = Usuario.new
 		usuario.nome = nome
 		usuario.email = email

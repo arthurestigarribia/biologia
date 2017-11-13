@@ -63,42 +63,42 @@ class AcidoNucleico < Cadeia
 	end
 
 	def complementar
-		if self.isDNA
-			dna = DNA.new
-			dna.cadeia = self.cadeia
-			return dna.complementar
-		elsif self.isRNA
+		if self.isRNA
 			rna = RNA.new
 			rna.cadeia = self.cadeia
 			return rna.complementar
+		elsif self.isDNA
+			dna = DNA.new
+			dna.cadeia = self.cadeia
+			return dna.complementar
 		else
 			return 'Cadeia inválida.'
 		end
 	end
 
 	def equivalente
-		if self.isDNA
-			dna = DNA.new
-			dna.cadeia = self.cadeia
-			return dna.equivalente
-		elsif self.isRNA
+		if self.isRNA
 			rna = RNA.new
 			rna.cadeia = self.cadeia
 			return rna.equivalente
+		elsif self.isDNA
+			dna = DNA.new
+			dna.cadeia = self.cadeia
+			return dna.equivalente
 		else
 			return 'Cadeia inválida.'
 		end
 	end
 
 	def acidos
-		if self.isDNA
-			dna = DNA.new
-			dna.cadeia = self.cadeia
-			return dna.acidos
-		elsif self.isRNA
+		if self.isRNA
 			rna = RNA.new
 			rna.cadeia = self.cadeia
 			return rna.acidos
+		elsif self.isRNA
+			dna = DNA.new
+			dna.cadeia = self.cadeia
+			return dna.acidos
 		else
 			return 'Cadeia inválida.'
 		end

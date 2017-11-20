@@ -20,7 +20,7 @@ def naoVazioNome(nome, email, senha)
 end
 
 def existe(email, senha)
-	return Usuario.all(:email => email, :senha => senha) != nil
+	return Usuario.count(:email => email, :senha => senha) > 0
 end
 
 if !existe('admin', 'admin')
@@ -103,6 +103,10 @@ post '/biologia/cadastro' do
 	nome = params['nome'].to_s
 	email = params['email'].to_s
 	senha = Digest::MD5.hexdigest(params['senha'])
+
+	puts !existe(email, senha)
+
+	puts naoVazioNome(nome, email, senha)
 
 	if !existe(email, senha) && naoVazioNome(nome, email, senha)
 		usuario = Usuario.new

@@ -21,7 +21,7 @@ class App
 	end
 
 	def existe(email, senha)
-		return Usuario.all(:email => email, :senha => senha) != nil
+		return Usuario.count(:email => email, :senha => senha) > 0
 	end
 
 	def initialize(usuario, root)
@@ -205,13 +205,6 @@ class Login
 				nome = entry3.get.to_s
 				email = entry4.get.to_s
 				senha = entry5.get.to_s
-
-				messageBox = Tk.messageBox(
-					'type' => 'ok',
-					'icon' => 'info',
-					'title' => 'Cadastro inválido',
-					'message' => nome + " " + email + " " + senha
-				)
 
 				if email == nil || senha == nil
 					messageBox = Tk.messageBox(

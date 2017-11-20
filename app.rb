@@ -20,7 +20,7 @@ def naoVazioNome(nome, email, senha)
 end
 
 def existe(email, senha)
-	return Usuario.all(:email => email, :senha => senha) != nil
+	return Usuario.count(:email => email, :senha => senha) > 0
 end
 
 if !existe('admin', 'admin')
